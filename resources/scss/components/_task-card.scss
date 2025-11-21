@@ -1,0 +1,334 @@
+// Task Card
+.task-card {
+    background: white;
+    border: 1px solid $card-border;
+    border-radius: $border-radius-md;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    cursor: pointer;
+    transition: $transition-base;
+    box-shadow: $shadow-sm;
+    
+    &:hover {
+        box-shadow: $shadow-md;
+        transform: translateY(-2px);
+        border-color: lighten($card-border, 5%);
+    }
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
+    
+    // Header
+    .task-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: $spacing-sm;
+        gap: $spacing-sm;
+        
+        .task-title {
+            font-size: $font-size-sm;
+            font-weight: $font-weight-semibold;
+            color: $text-dark;
+            margin: 0;
+            flex: 1;
+            line-height: $line-height-tight;
+        }
+        
+        .task-delete-btn {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+            background: transparent;
+            border-radius: $border-radius-sm;
+            color: $text-muted;
+            font-size: $font-size-xs;
+            transition: $transition-base;
+            cursor: pointer;
+            flex-shrink: 0;
+            
+            &:hover {
+                background: $danger;
+                color: white;
+                border-color: $danger;
+                transform: scale(1.1);
+            }
+        }
+    }
+    
+    // Description
+    .task-description {
+        color: $text-secondary;
+        font-size: $font-size-xs;
+        line-height: $line-height-base;
+        margin-bottom: $spacing-sm;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        
+        &:empty {
+            display: none;
+        }
+    }
+    
+    // Meta
+    .task-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-sm;
+        align-items: center;
+        margin-bottom: $spacing-sm;
+        
+        .task-assignee {
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+            font-size: $font-size-xs;
+            color: $text-muted;
+            
+            .assignee-avatar {
+                width: 20px;
+                height: 20px;
+                border-radius: $border-radius-full;
+                background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 10px;
+                font-weight: $font-weight-semibold;
+            }
+            
+            strong {
+                color: $text-dark;
+                font-weight: $font-weight-medium;
+            }
+        }
+        
+        .task-tag {
+            padding: 0.125rem 0.5rem;
+            background: lighten($primary, 45%);
+            color: $primary-dark;
+            font-size: $font-size-xs;
+            font-weight: $font-weight-medium;
+            border-radius: $border-radius-sm;
+        }
+    }
+    
+    // Status
+    .task-status-select {
+        width: 100%;
+        padding: $spacing-xs $spacing-sm;
+        border: 1px solid $input-border-color;
+        border-radius: $border-radius-sm;
+        background: white;
+        color: $text-dark;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        cursor: pointer;
+        transition: $transition-base;
+        margin-bottom: $spacing-sm;
+        
+        &:hover {
+            border-color: $primary;
+        }
+        
+        &:focus {
+            outline: none;
+            border-color: $primary;
+            box-shadow: 0 0 0 3px rgba($primary, 0.1);
+        }
+    }
+    
+    // Footer
+    .task-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: $spacing-sm;
+        border-top: 1px solid lighten($card-border, 5%);
+        
+        .task-comments {
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+            color: $text-muted;
+            font-size: $font-size-xs;
+            text-decoration: none;
+            transition: $transition-colors;
+            
+            &:hover {
+                color: $primary;
+            }
+            
+            &::before {
+                content: '💬';
+                font-size: 14px;
+            }
+        }
+        
+        .task-date {
+            color: $text-muted;
+            font-size: $font-size-xs;
+        }
+    }
+}
+
+// Form Card
+.task-form-card {
+    background: white;
+    border: 2px dashed $card-border;
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    margin-bottom: $spacing-xl;
+    transition: $transition-base;
+    
+    &:hover {
+        border-color: $primary;
+        box-shadow: $shadow;
+    }
+    
+    .card-title {
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+        color: $text-dark;
+        margin-bottom: $spacing-md;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        
+        &::before {
+            content: '✨';
+            font-size: 18px;
+        }
+    }
+    
+    .form-group {
+        margin-bottom: $spacing-md;
+    }
+    
+    .btn-success {
+        width: 100%;
+        padding: $spacing-sm $spacing-lg;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-sm;
+        border-radius: $border-radius-md;
+        transition: $transition-base;
+        
+        &:hover {
+            transform: translateY(-1px);
+            box-shadow: $shadow-md;
+        }
+    }
+}
+
+// Priorities
+.priority-high {
+    border-left-color: $danger !important;
+}
+
+.priority-medium {
+    border-left-color: $warning !important;
+}
+
+.priority-low {
+    border-left-color: $info !important;
+}
+
+// Labels
+.task-label {
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    
+    &.label-backend {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+    
+    &.label-frontend {
+        background: #fce7f3;
+        color: #be185d;
+    }
+    
+    &.label-database {
+        background: #e0e7ff;
+        color: #4338ca;
+    }
+    
+    &.label-docs {
+        background: #d1fae5;
+        color: #065f46;
+    }
+}
+
+// Effects
+.task-card-hover {
+    &:hover { 
+        transform: translateY(-2px); 
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.05)!important; 
+        border-color: #d1d5db !important; 
+    }
+}
+
+.hover-opacity-100:hover { 
+    opacity: 1 !important; 
+    color: #ef4444 !important; 
+}
+
+// Badges
+.asana-pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.asana-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+
+    // Status
+    &.status-not-started {
+        background-color: #e0f2fe;
+        color: #0284c7;
+        
+        &:hover { background-color: #bae6fd; }
+    }
+
+    &.status-in-progress {
+        background-color: #fef9c3;
+        color: #ca8a04;
+        
+        &:hover { background-color: #fde047; }
+    }
+
+    &.status-done {
+        background-color: #ccfbf1;
+        color: #0f766e;
+        
+        &:hover { background-color: #99f6e4; }
+    }
+
+    // Priorities
+    &.priority-critical { background-color: #fee2e2; color: #dc2626; }
+    &.priority-high     { background-color: #ffedd5; color: #ea580c; }
+    &.priority-medium   { background-color: #e0e7ff; color: #4f46e5; }
+    &.priority-low      { background-color: #f3f4f6; color: #4b5563; }
+}

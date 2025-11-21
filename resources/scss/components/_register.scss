@@ -1,0 +1,116 @@
+// Register Page Styles
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    padding: 2rem 1rem;
+
+    .register-card {
+        max-width: 500px;
+        width: 100%;
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+
+        .card-body {
+            padding: 2.5rem;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+
+            h1 {
+                font-size: 1.875rem;
+                font-weight: 700;
+                color: #1f2937;
+                margin-bottom: 0.5rem;
+            }
+
+            p {
+                color: #6b7280;
+                font-size: 0.9375rem;
+            }
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+            transition: all 0.2s ease;
+
+            &:focus {
+                border-color: #f093fb;
+                box-shadow: 0 0 0 0.2rem rgba(240, 147, 251, 0.1);
+            }
+
+            &.is-invalid {
+                border-color: #dc3545;
+            }
+        }
+
+        .invalid-feedback {
+            font-size: 0.8125rem;
+            color: #dc3545;
+            margin-top: 0.25rem;
+        }
+
+        .btn-primary {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            border-radius: 0.5rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 15px -3px rgba(240, 147, 251, 0.3);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+
+        .text-muted {
+            color: #6b7280 !important;
+            font-size: 0.875rem;
+        }
+
+        a {
+            color: #f093fb;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: #f5576c;
+                text-decoration: underline;
+            }
+        }
+
+        .password-requirements {
+            font-size: 0.8125rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+
+            li {
+                margin-bottom: 0.25rem;
+            }
+        }
+    }
+}

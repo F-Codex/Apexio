@@ -1,0 +1,29 @@
+// Styling khusus halaman Project Detail
+.page-header { 
+    background-color: white; 
+}
+
+.custom-tabs {
+    .nav-link { 
+        border: none; 
+        margin-bottom: -2px; 
+        padding: 1rem 1.5rem; 
+        font-weight: 500; 
+        
+        &:hover { 
+            color: #2563eb !important; 
+        }
+    }
+}
+
+.avatar-stack {
+    img { 
+        transition: transform 0.2s; 
+        
+        &:hover { 
+            transform: translateY(-2px); 
+            z-index: 10; 
+            position: relative; 
+        }
+    }
+}

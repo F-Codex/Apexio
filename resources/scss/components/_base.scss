@@ -1,0 +1,184 @@
+// Typography
+h1, h2, h3, h4, h5, h6 {
+    font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+    color: $text-dark;
+    margin-bottom: $spacing-md;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+.h3 { font-size: 1.5rem; font-weight: $font-weight-bold; }
+.h4 { font-size: 1.25rem; font-weight: $font-weight-bold; }
+.h5 { font-size: 1.125rem; font-weight: $font-weight-bold; }
+.h6 { font-size: 1rem; font-weight: $font-weight-semibold; }
+
+// Links
+a {
+    color: $primary;
+    text-decoration: none;
+    transition: $transition-colors;
+    
+    &:hover {
+        color: $primary-dark;
+    }
+}
+
+// Cards - Enhanced
+.card {
+    background: $card-bg;
+    border: 1px solid $card-border;
+    border-radius: $card-radius;
+    box-shadow: $shadow-sm;
+    transition: $transition-base;
+    overflow: hidden;
+    
+    &:hover {
+        box-shadow: $shadow-md;
+    }
+    
+    .card-header {
+        background: transparent;
+        border-bottom: 1px solid $card-border;
+        padding: $card-padding;
+        font-weight: $font-weight-semibold;
+    }
+    
+    .card-body {
+        padding: $card-padding;
+    }
+    
+    .card-footer {
+        background: rgba($light-border, 0.3);
+        border-top: 1px solid $card-border;
+        padding: $card-padding;
+    }
+    
+    .card-title {
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        color: $text-dark;
+        margin-bottom: $spacing-sm;
+    }
+    
+    .card-text {
+        color: $text-secondary;
+        font-size: $font-size-sm;
+        line-height: $line-height-relaxed;
+    }
+}
+
+// Shadow variants
+.shadow-sm { box-shadow: $shadow-sm; }
+.shadow { box-shadow: $shadow; }
+.shadow-md { box-shadow: $shadow-md; }
+.shadow-lg { box-shadow: $shadow-lg; }
+.shadow-xl { box-shadow: $shadow-xl; }
+
+// Border radius utilities
+.rounded-sm { border-radius: $border-radius-sm; }
+.rounded { border-radius: $border-radius; }
+.rounded-md { border-radius: $border-radius-md; }
+.rounded-lg { border-radius: $border-radius-lg; }
+.rounded-xl { border-radius: $border-radius-xl; }
+.rounded-2xl { border-radius: $border-radius-2xl; }
+.rounded-full { border-radius: $border-radius-full; }
+
+// List group improvements
+.list-group {
+    gap: $spacing-sm;
+    
+    .list-group-item {
+        background: $card-bg;
+        border: 1px solid $card-border;
+        border-radius: $border-radius-lg;
+        padding: $spacing-lg;
+        transition: $transition-base;
+        
+        &:hover {
+            box-shadow: $shadow-md;
+            transform: translateY(-2px);
+            border-color: darken($card-border, 5%);
+        }
+        
+        &.active {
+            background: $primary;
+            border-color: $primary;
+            color: white;
+        }
+        
+        h5, h6 {
+            font-weight: $font-weight-semibold;
+            color: $text-dark;
+            margin-bottom: $spacing-xs;
+        }
+        
+        p {
+            color: $text-secondary;
+            font-size: $font-size-sm;
+            margin-bottom: $spacing-xs;
+        }
+        
+        small {
+            color: $text-muted;
+            font-size: $font-size-xs;
+        }
+    }
+}
+
+// Badge improvements
+.badge {
+    padding: $badge-padding-y $badge-padding-x;
+    font-size: $badge-font-size;
+    font-weight: $badge-font-weight;
+    border-radius: $badge-border-radius;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    
+    &.bg-primary {
+        background-color: $primary !important;
+        color: white;
+    }
+    
+    &.bg-secondary {
+        background-color: #64748b !important;
+        color: white;
+    }
+    
+    &.bg-success {
+        background-color: $success !important;
+        color: white;
+    }
+    
+    &.bg-danger {
+        background-color: $danger !important;
+        color: white;
+    }
+}
+
+// Text utilities
+.text-muted {
+    color: $text-muted !important;
+}
+
+.text-secondary {
+    color: $text-secondary !important;
+}
+
+.fw-bold {
+    font-weight: $font-weight-bold !important;
+}
+
+.fw-semibold {
+    font-weight: $font-weight-semibold !important;
+}
+
+.fw-medium {
+    font-weight: $font-weight-medium !important;
+}
