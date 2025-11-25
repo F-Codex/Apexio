@@ -1,6 +1,7 @@
 import './bootstrap';
 import * as bootstrap from 'bootstrap';
 import './profile'; // Import logic profile
+import './kanban';  // Import logic kanban baru
 
 window.bootstrap = bootstrap;
 
@@ -29,12 +30,12 @@ document.addEventListener('livewire:initialized', () => {
     Livewire.on('open-modal', (id) => {
         // Handle array or string argument
         const modalId = Array.isArray(id) ? id[0] : (id || 'commentsModal');
-        
+
         // Jika event 'confirm-user-deletion' (AlpineJS usually handles this, but just in case needed here)
-        if (modalId === 'confirm-user-deletion') return; 
+        if (modalId === 'confirm-user-deletion') return;
 
         handleModal(modalId, 'show');
     });
-    
+
     Livewire.on('close-modal', () => handleModal('commentsModal', 'hide'));
 });

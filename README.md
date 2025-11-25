@@ -34,9 +34,9 @@ Below is the main interface of Apexio, featuring the Sidebar and Kanban Board:
 
 Features scheduled for the next development phase:
 
-- [ ] **Drag & Drop Kanban:** Implement moving cards between columns via drag-and-drop (*SortableJS*).
-- [ ] **Due Date System:** Add due dates to tasks with overdue indicators.
-- [ ] **Real-time Notifications:** Automated notifications for deadlines or task updates.
+- [x] **Drag & Drop Kanban:** Implement moving cards between columns via drag-and-drop (*SortableJS*).
+- [x] **Due Date System:** Add due dates to tasks with overdue indicators.
+- [x] **Real-time Notifications:** Automated notifications for deadlines or task updates.
 - [ ] **"My Tasks" Page:** A dedicated page displaying all tasks assigned to the current user across all projects.
 - [ ] **Super Admin Dashboard:** A specialized panel for user and system management.
 

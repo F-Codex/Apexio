@@ -15,18 +15,20 @@ class TaskList extends Component
 
     public Project $project;
     public Collection $members;
-  
+
     // Form Properties
     public string $title = '';
     public ?string $description = null;
     public ?int $assignee_id = null;
     public string $priority = 'medium';
     public string $status = 'To-Do';
+    public ?string $due_date = null;
 
+    // Permissions
     public bool $canCreateTasks = false;
-    public bool $canDeleteTasks = false;
-    
-    public ?Task $taskWithComments = null; 
+    public bool $canDeleteTasks = false; 
+
+    public ?Task $taskWithComments = null;
 
     protected $listeners = [
         'task-updated' => '$refresh'
@@ -40,6 +42,7 @@ class TaskList extends Component
             'assignee_id' => 'nullable|exists:users,id',
             'priority' => 'required|in:low,medium,high,critical',
             'status' => 'required|in:To-Do,In-Progress,Done',
+            'due_date' => 'nullable|date',
         ];
     }
 
@@ -71,7 +74,7 @@ class TaskList extends Component
     public function loadComments(int $taskId): void
     {
         $task = Task::findOrFail($taskId);
-        $this->authorize('view', $task); 
+        $this->authorize('view', $task);
         $this->taskWithComments = $task;
         $this->dispatch('open-modal', 'commentsModal');
     }
@@ -85,7 +88,7 @@ class TaskList extends Component
     public function saveTask(): void
     {
         $this->authorize('create', [Task::class, $this->project]);
-        
+
         $validatedData = $this->validate();
 
         $this->project->tasks()->create([
@@ -94,14 +97,16 @@ class TaskList extends Component
             'user_id' => $validatedData['assignee_id'],
             'priority' => $validatedData['priority'],
             'status' => $validatedData['status'],
-            'assignee_id' => $validatedData['assignee_id']
+            'assignee_id' => $validatedData['assignee_id'],
+            'due_date' => $validatedData['due_date'],
         ]);
 
-        $this->reset('title', 'description', 'assignee_id', 'priority', 'status');
+        $this->reset('title', 'description', 'assignee_id', 'priority', 'status', 'due_date');
         $this->priority = 'medium';
         $this->status = 'To-Do';
-        
-        $this->dispatch('close-create-modal'); 
+
+        $this->dispatch('close-create-modal');
+        $this->dispatch('task-notification', message: 'Task created successfully!', type: 'success');
     }
 
     public function updateTaskStatus(int $task_id, string $status): void
@@ -109,10 +114,25 @@ class TaskList extends Component
         if (!in_array($status, self::STATUS_OPTIONS)) {
             return;
         }
+
         $task = Task::find($task_id);
+        
+        // standard policy check
         $this->authorize('update', $task);
+
+        // Enforce ownership: only admins or the assignee can move the task
+        if ($task->assignee_id && $task->assignee_id !== Auth::id() && !$this->canDeleteTasks) {
+            $this->dispatch('task-notification', message: 'You can only move your own tasks!', type: 'error');
+            return;
+        }
+
+        $oldStatus = $task->status;
         $task->status = $status;
         $task->save();
+
+        if ($oldStatus !== $status) {
+            $this->dispatch('task-notification', message: "Task moved to {$status}", type: 'info');
+        }
     }
 
     public function deleteTask(int $task_id): void
@@ -120,5 +140,6 @@ class TaskList extends Component
         $task = Task::find($task_id);
         $this->authorize('delete', $task);
         $task->delete();
+        $this->dispatch('task-notification', message: "Task deleted", type: 'error');
     }
 }
