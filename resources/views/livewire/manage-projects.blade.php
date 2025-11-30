@@ -50,9 +50,8 @@
         @endforeach
     </div>
 
-    {{-- Create Project Modal (TETAP SAMA SEPERTI SEBELUMNYA, JANGAN DIHAPUS) --}}
+    {{-- Create Project Modal --}}
     <div class="modal fade" id="createProjectModal" tabindex="-1" aria-hidden="true" wire:ignore.self>
-       {{-- ... kode modal lama Anda ... --}}
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <form wire:submit.prevent="saveProject">

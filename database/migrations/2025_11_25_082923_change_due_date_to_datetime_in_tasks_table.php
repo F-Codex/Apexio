@@ -9,7 +9,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            // Mengubah tipe kolom dari DATE ke DATETIME
             $table->dateTime('due_date')->nullable()->change();
         });
     }

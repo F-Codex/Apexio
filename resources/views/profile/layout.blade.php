@@ -8,12 +8,10 @@
             </div>
 
             <div class="row g-4 g-lg-5">
-                {{-- Sidebar Navigasi Lokal --}}
                 <div class="col-12 col-lg-3">
                     @include('profile.partials.sidebar-nav')
                 </div>
 
-                {{-- Konten Halaman Dinamis --}}
                 <div class="col-12 col-lg-8">
                     <div class="card border-0 shadow-sm bg-white rounded-4">
                         <div class="card-body p-4 p-lg-5">

@@ -172,12 +172,8 @@
     }
 }
 
-// ============================================
-// NEW STYLES FOR DRAG & DROP AND DUE DATES
-// ============================================
-
 .kanban-tasks-list {
-    min-height: 150px; // Area drop kosong harus punya tinggi
+    min-height: 150px;
     height: 100%;
 }
 
@@ -187,7 +183,7 @@
     opacity: 0.5;
 
     * {
-        opacity: 0; // Sembunyikan konten saat jadi ghost
+        opacity: 0;
     }
 }
 
