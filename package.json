@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "bootstrap": "^5.3.8",
-        "sass": "^1.93.3"
+        "sass": "^1.93.3",
+        "sortablejs": "^1.15.6"
     }
 }

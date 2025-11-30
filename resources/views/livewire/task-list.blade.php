@@ -1,11 +1,11 @@
 <div class="h-100 d-flex flex-column">
-    <div class="d-flex gap-4 h-100 w-100 overflow-x-auto pb-4 px-2" style="scroll-behavior: smooth;"> 
+    <div class="d-flex gap-4 h-100 w-100 overflow-x-auto pb-4 px-2" style="scroll-behavior: smooth;">
         @foreach([
-            ['id' => 'todo', 'title' => 'To Do', 'tasks' => $todoTasks],
-            ['id' => 'inprogress', 'title' => 'In Progress', 'tasks' => $inProgressTasks],
-            ['id' => 'done', 'title' => 'Done', 'tasks' => $doneTasks]
+            ['id' => 'To-Do', 'title' => 'To Do', 'tasks' => $todoTasks],
+            ['id' => 'In-Progress', 'title' => 'In Progress', 'tasks' => $inProgressTasks],
+            ['id' => 'Done', 'title' => 'Done', 'tasks' => $doneTasks]
         ] as $col)
-        
+
         <div class="d-flex flex-column h-100 flex-fill" style="min-width: 300px;">
             {{-- Column Header --}}
             <div class="d-flex align-items-center justify-content-between mb-3 px-1">
@@ -15,33 +15,48 @@
                 </div>
             </div>
 
-            {{-- Task List --}}
-            <div class="d-flex flex-column gap-2 pb-5" style="min-height: 100px;">
+            {{-- Task List Container --}}
+            <div class="kanban-tasks-list d-flex flex-column gap-2 pb-5"
+                 data-status="{{ $col['id'] }}"
+                 wire:ignore.self
+                 style="min-height: 100px;">
+
                 @forelse ($col['tasks'] as $task)
-                    <div class="card border border-light shadow-sm task-card-hover position-relative" 
-                         style="border-radius: 8px; cursor: pointer; transition: all 0.2s;"
-                         wire:click="loadComments({{ $task->id }})">
+                    {{-- Determine drag permissions based on role and ownership --}}
+                    @php
+                        $isAssignee = $task->assignee_id === auth()->id();
+                        $isUnassigned = $task->assignee_id === null;
+                        $isAdmin = $canDeleteTasks; 
                         
+                        $canMove = $isAssignee || $isUnassigned || $isAdmin;
+                        
+                        $dragClass = $canMove ? 'js-draggable-task' : 'opacity-75';
+                        $cursorStyle = $canMove ? 'cursor: grab;' : 'cursor: not-allowed;';
+                    @endphp
+
+                    <div class="card border border-light shadow-sm task-card-hover position-relative {{ $dragClass }}"
+                         style="border-radius: 8px; {{ $cursorStyle }} transition: all 0.2s;"
+                         data-task-id="{{ $task->id }}"
+                         wire:key="task-{{ $task->id }}"
+                         wire:click="loadComments({{ $task->id }})">
+
                         <div class="card-body p-3">
                             <div class="d-flex align-items-start gap-3 mb-2">
                                 {{-- Check Circle --}}
-                                <div class="check-circle flex-shrink-0 mt-1" 
-                                     style="width: 18px; height: 18px; border: 1px solid #d1d5db; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2;"
-                                     wire:click.stop="updateTaskStatus({{ $task->id }}, 'Done')">
-                                     @if($col['id'] == 'done')
+                                <div class="check-circle flex-shrink-0 mt-1"
+                                     style="width: 18px; height: 18px; border: 1px solid #d1d5db; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; {{ $canMove ? 'cursor: pointer;' : 'pointer-events: none;' }}"
+                                     @if($canMove) wire:click.stop="updateTaskStatus({{ $task->id }}, 'Done')" @endif>
+                                     @if($col['id'] == 'Done')
                                         <div class="bg-success rounded-circle" style="width: 10px; height: 10px;"></div>
                                      @endif
                                 </div>
-                                
+
                                 <div class="flex-grow-1">
-                                    {{-- Title --}}
-                                    <h6 class="mb-1 fw-medium text-dark {{ $col['id'] == 'done' ? 'text-decoration-line-through text-muted' : '' }}" style="font-size: 0.95rem; line-height: 1.4;">
+                                    <h6 class="mb-1 fw-medium text-dark {{ $col['id'] == 'Done' ? 'text-decoration-line-through text-muted' : '' }}" style="font-size: 0.95rem; line-height: 1.4;">
                                         {{ $task->title }}
                                     </h6>
 
-                                    {{-- Badges --}}
                                     <div class="asana-pill-container">
-                                        {{-- Priority --}}
                                         @php
                                             $prioValue = $task->priority ?? 'medium';
                                             $prioClass = match($prioValue) {
@@ -56,7 +71,6 @@
                                             @if($prioValue === 'critical') 🔥 @endif {{ ucfirst($prioValue) }}
                                         </span>
 
-                                        {{-- Status --}}
                                         @php
                                             $statusLabel = match($task->status) {
                                                 'To-Do'       => 'Not Started',
@@ -64,7 +78,6 @@
                                                 'Done'        => 'Done',
                                                 default       => $task->status
                                             };
-                                            
                                             $statusClass = match($task->status) {
                                                 'To-Do'       => 'status-not-started',
                                                 'In-Progress' => 'status-in-progress',
@@ -78,10 +91,10 @@
                                     </div>
                                 </div>
 
-                                {{-- Delete --}}
+                                {{-- Delete Button --}}
                                 @if($canDeleteTasks)
                                 <div class="position-absolute top-0 end-0 p-2" style="z-index: 2;">
-                                    <button class="btn btn-link text-muted p-0 opacity-25 hover-opacity-100" 
+                                    <button class="btn btn-link text-muted p-0 opacity-25 hover-opacity-100"
                                             wire:click.stop="deleteTask({{ $task->id }})" wire:confirm="Delete this task?">
                                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                     </button>
@@ -89,18 +102,45 @@
                                 @endif
                             </div>
 
-                            {{-- Card Footer --}}
+                            {{-- Real-time Due Date Display --}}
+                            @if($task->due_date)
+                                @php
+                                    // Calculate due status based on local time assumption
+                                    $nowStr = now()->format('Y-m-d H:i:s');
+                                    $dueStr = $task->due_date->format('Y-m-d H:i:s');
+                                    
+                                    $isOverdue = $dueStr < $nowStr && $task->status !== 'Done';
+                                    $diffHours = (strtotime($dueStr) - strtotime($nowStr)) / 3600;
+                                    $isDueSoon = !$isOverdue && $diffHours <= 24 && $task->status !== 'Done';
+
+                                    $initialClass = $isOverdue ? 'overdue' : ($isDueSoon ? 'due-soon' : '');
+                                    $initialText = $isOverdue ? '(Late)' : ($isDueSoon ? '(Soon)' : '');
+                                @endphp
+
+                                <div class="mt-2 mb-2">
+                                    {{-- Use ISO format for JS parsing --}}
+                                    <span class="badge-due-date js-due-date-badge {{ $initialClass }}" 
+                                          title="{{ $task->due_date->format('d M Y H:i') }}"
+                                          data-due-date="{{ $task->due_date->format('Y-m-d\TH:i:s') }}"
+                                          data-status-task="{{ $task->status }}">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        {{ $task->due_date->format('M d, H:i') }}
+                                        <span class="due-status-text ms-1 fw-bold">{{ $initialText }}</span>
+                                    </span>
+                                </div>
+                            @endif
+
                             <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top border-light">
                                 <div>
                                     @if ($task->assignee)
-                                        <img src="{{ $task->assignee->avatar_url }}" 
+                                        <img src="{{ $task->assignee->avatar_url }}"
                                              class="rounded-circle border border-white" width="24" height="24" title="{{ $task->assignee->name }}" style="object-fit: cover;">
                                     @else
                                         <div class="rounded-circle border border-dashed d-flex align-items-center justify-content-center text-muted small" style="width: 24px; height: 24px;">?</div>
                                     @endif
                                 </div>
                                 <div class="d-flex align-items-center gap-3 text-muted small">
-                                    <span class="{{ $col['id'] == 'done' ? 'text-success' : '' }}">{{ $task->created_at->format('M d') }}</span>
+                                    <span class="{{ $col['id'] == 'Done' ? 'text-success' : '' }}">{{ $task->created_at->format('M d') }}</span>
                                     <div class="d-flex align-items-center gap-1 {{ $task->comments_count > 0 ? 'text-primary' : 'text-muted opacity-50' }}">
                                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                                         <span>{{ $task->comments_count }}</span>
@@ -147,6 +187,13 @@
                                 </select>
                             </div>
                         </div>
+
+                        {{-- Due Date Input --}}
+                        <div class="mb-3">
+                            <label class="form-label small text-muted mb-1">Due Date & Time</label>
+                            <input type="datetime-local" class="form-control form-control-sm" wire:model="due_date">
+                        </div>
+
                         <textarea class="form-control mb-3" rows="3" placeholder="Description..." wire:model="description"></textarea>
                         <select class="form-select mb-3" wire:model="assignee_id">
                             <option value="">Unassigned</option>
@@ -162,7 +209,7 @@
     </div>
 
     {{-- Comments Modal --}}
-    <div class="modal fade" id="commentsModal" tabindex="-1" wire:ignore.self> 
+    <div class="modal fade" id="commentsModal" tabindex="-1" wire:ignore.self>
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0 shadow-lg overflow-hidden" style="height: 80vh;">
           <div class="modal-body p-0 h-100">

@@ -8,15 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_admin')->default(false);
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dateTime('due_date')->nullable()->change();
         });
     }
 
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('is_admin');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->date('due_date')->nullable()->change();
         });
     }
 };

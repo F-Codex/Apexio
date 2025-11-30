@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Cache;
 
 class User extends Authenticatable
 {
@@ -17,6 +15,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
         'avatar_path',
     ];
 
@@ -30,27 +29,34 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
 
-    public function ownedProjects(): HasMany
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_members')->withPivot('role');
+    }
+
+    public function ownedProjects()
     {
         return $this->hasMany(Project::class, 'owner_id');
     }
 
-    public function projects(): BelongsToMany
+    public function tasks()
     {
-        return $this->belongsToMany(Project::class, 'project_members', 'user_id', 'project_id')
-                    ->withPivot('role')
-                    ->withTimestamps();
+        return $this->hasMany(Task::class, 'assignee_id');
     }
 
     public function getAvatarUrlAttribute()
     {
-        if ($this->avatar_path && Storage::disk('public')->exists($this->avatar_path)) {
-            return Storage::url($this->avatar_path);
-        }
-        
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
+        return $this->avatar_path 
+            ? asset('storage/' . $this->avatar_path) 
+            : null;
     }
 }
