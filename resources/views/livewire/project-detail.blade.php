@@ -27,20 +27,28 @@
             {{-- Actions --}}
             <div class="d-flex align-items-center gap-2 mt-2">
                 
-                {{-- Members --}}
+                {{-- Members (UPDATED LOGIC) --}}
                 <div class="d-flex align-items-center">
                     <div class="d-flex avatar-stack">
                         @foreach($project->members->take(3) as $member)
-                            <img src="{{ $member->avatar_url }}" 
-                                 class="rounded-circle border-2 border-white shadow-sm" 
-                                 width="32" height="32" 
-                                 title="{{ $member->name }}"
-                                 style="margin-right: -8px; object-fit: cover; background-color: white;">
+                            @if($member->avatar_path)
+                                <img src="{{ $member->avatar_url }}" 
+                                     class="rounded-circle border-2 border-white shadow-sm" 
+                                     width="32" height="32" 
+                                     title="{{ $member->name }}"
+                                     style="margin-right: -8px; object-fit: cover; background-color: white; position: relative; z-index: 1;">
+                            @else
+                                <div class="rounded-circle border-2 border-white bg-primary d-flex align-items-center justify-content-center text-white fw-bold shadow-sm" 
+                                     title="{{ $member->name }}"
+                                     style="width: 32px; height: 32px; margin-right: -8px; font-size: 10px; position: relative; z-index: 1;">
+                                    {{ strtoupper(substr($member->name, 0, 1)) }}
+                                </div>
+                            @endif
                         @endforeach
                         
                         @if($project->members->count() > 3)
                             <div class="rounded-circle border-2 border-white bg-light text-muted d-flex align-items-center justify-content-center small fw-bold shadow-sm" 
-                                 style="width: 32px; height: 32px; margin-right: -8px; font-size: 10px;">
+                                 style="width: 32px; height: 32px; margin-right: -8px; font-size: 10px; position: relative; z-index: 0;">
                                 +{{ $project->members->count() - 3 }}
                             </div>
                         @endif

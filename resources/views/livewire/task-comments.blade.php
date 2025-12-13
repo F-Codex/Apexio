@@ -20,9 +20,16 @@
             <div class="d-flex gap-3 mb-4 animate-fade-in">
                 {{-- Avatar --}}
                 <div class="flex-shrink-0">
-                    <img src="{{ $comment->user->avatar_url }}" 
-                         class="rounded-circle border border-white shadow-sm" 
-                         width="32" height="32" style="object-fit: cover;">
+                    @if($comment->user->avatar_path)
+                        <img src="{{ $comment->user->avatar_url }}" 
+                             class="rounded-circle border border-white shadow-sm" 
+                             width="32" height="32" style="object-fit: cover;">
+                    @else
+                        <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold border border-white shadow-sm" 
+                             style="width: 32px; height: 32px; font-size: 12px;">
+                            {{ strtoupper(substr($comment->user->name, 0, 1)) }}
+                        </div>
+                    @endif
                 </div>
                 
                 <div class="flex-grow-1">

@@ -29,11 +29,18 @@
                 <div class="d-flex align-items-center justify-content-between p-2 rounded hover-bg-light transition-all">
                     {{-- Avatar & Info --}}
                     <div class="d-flex align-items-center gap-3">
-                        <img src="{{ $member->avatar_url }}" 
-                             alt="{{ $member->name }}"
-                             class="rounded-circle border border-white shadow-sm" 
-                             width="40" height="40"
-                             style="object-fit: cover;">
+                        @if($member->avatar_path)
+                            <img src="{{ $member->avatar_url }}" 
+                                 alt="{{ $member->name }}"
+                                 class="rounded-circle border border-white shadow-sm" 
+                                 width="40" height="40"
+                                 style="object-fit: cover;">
+                        @else
+                            <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold border border-white shadow-sm" 
+                                 style="width: 40px; height: 40px; font-size: 16px;">
+                                {{ strtoupper(substr($member->name, 0, 1)) }}
+                            </div>
+                        @endif
                              
                         <div style="line-height: 1.3;">
                             <div class="fw-bold text-dark" style="font-size: 0.9rem;">{{ $member->name }}</div>

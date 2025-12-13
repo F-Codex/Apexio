@@ -17,6 +17,9 @@ class AdminDashboard extends Component
 
     public $search = '';
 
+    // Set pagination theme
+    protected $paginationTheme = 'bootstrap';
+
     #[Layout('layouts.app-with-sidebar')] 
     public function mount()
     {
@@ -24,6 +27,12 @@ class AdminDashboard extends Component
         if (!Auth::user()->is_admin) {
             abort(403, 'Unauthorized access.');
         }
+    }
+
+    // Reset search and go to first page when search changes
+    public function updatingSearch()
+    {
+        $this->resetPage();
     }
 
     public function resetPassword($userId)

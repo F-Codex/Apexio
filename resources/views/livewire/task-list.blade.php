@@ -133,8 +133,16 @@
                             <div class="d-flex align-items-center justify-content-between mt-3 pt-2 border-top border-light">
                                 <div>
                                     @if ($task->assignee)
-                                        <img src="{{ $task->assignee->avatar_url }}"
-                                             class="rounded-circle border border-white" width="24" height="24" title="{{ $task->assignee->name }}" style="object-fit: cover;">
+                                        @if($task->assignee->avatar_path)
+                                            <img src="{{ $task->assignee->avatar_url }}"
+                                                 class="rounded-circle border border-white" width="24" height="24" title="{{ $task->assignee->name }}" style="object-fit: cover;">
+                                        @else
+                                            <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white fw-bold border border-white" 
+                                                 title="{{ $task->assignee->name }}"
+                                                 style="width: 24px; height: 24px; font-size: 10px;">
+                                                {{ strtoupper(substr($task->assignee->name, 0, 1)) }}
+                                            </div>
+                                        @endif
                                     @else
                                         <div class="rounded-circle border border-dashed d-flex align-items-center justify-content-center text-muted small" style="width: 24px; height: 24px;">?</div>
                                     @endif
